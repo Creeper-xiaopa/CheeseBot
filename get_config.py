@@ -2,6 +2,7 @@ import yaml
 from pathlib import Path
 from dataclasses import dataclass
 from typing import List, Literal
+from log import log_msg
 
 def readonly_property(name):
     # 生成只读属性访问私有变量
@@ -120,5 +121,5 @@ def load(config_path: str = 'config.yml') -> BotConfig:
 try:
     load()
 except RuntimeError as e:
-    print(e)
+    log_msg("CRITICAL", str(e))
     exit(1)

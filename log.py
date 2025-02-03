@@ -73,7 +73,7 @@ console_handler.setFormatter(ColoredFormatter('[%(levelname)s] %(asctime)s %(mes
 logger.addHandler(file_handler)
 logger.addHandler(console_handler)
 
-def log_message(level, body):
+def log_msg(level, body):
     # 将字符串日志级别映射到 logging 模块的常量
     log_levels = {
         'DEBUG': logging.DEBUG,

@@ -2,7 +2,7 @@ import get_msg
 import threading
 import time
 from get_config import bot_config
-from log import log_message
+from log import log_msg
 
 def start_webhook(): 
     get_msg.server(host=bot_config.webhook_host, port=bot_config.webhook_port)
@@ -19,5 +19,5 @@ def main():
 
 
 if __name__ == '__main__':
-    log_message('INFO', '开始记录日志')
+    log_msg('INFO', '开始记录日志')
     main()

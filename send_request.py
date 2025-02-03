@@ -1,5 +1,6 @@
 import requests
 from get_config import bot_config
+from log import log_msg
 
 # 基础结构
 def send_request(addr, body):
@@ -16,7 +17,7 @@ def send_request(addr, body):
         response.raise_for_status()
         return response.json()
     except requests.RequestException as e:
-        print(f"请求失败:\n{str(e)}")
+        log_msg("ERROR", f"请求失败: {str(e)}")
         return e
     
 # 点赞
