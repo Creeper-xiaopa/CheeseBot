@@ -116,9 +116,9 @@ def load(config_path: str = 'config.yml') -> BotConfig:
     except Exception as e:
         raise RuntimeError(e) from e
 
-if __name__ == "__main__":
-    try:
-        load()
-    except RuntimeError as e:
-        print(e)
-        exit(1)
+
+try:
+    load()
+except RuntimeError as e:
+    print(e)
+    exit(1)
