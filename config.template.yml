@@ -1,0 +1,30 @@
+# CheeseBot 配置文件
+# 请将该文件名改为 config.yml 并根据实际情况修改配置项
+# Copyright (c) 2024- Creeper_xiaopa. All rights reserved.
+
+# 配置文件版本, 请勿修改
+config_version: 1
+
+# Webhook 服务配置
+webhook_service:
+  host: 0.0.0.0  # 监听所有可用 IP 地址
+  port: 8080     # 监听端口
+
+# OneBot 服务器配置
+onebot_server:
+  address: http://localhost:3000  # OneBot 服务器地址，包含协议和端口
+  token: "abc1234567890"  # 令牌值, 没有就随便写一个
+
+
+# 群聊管理配置
+group_management:
+  mode: whitelist  # 群聊模式，可选值: all, whitelist, blacklist
+  group_list:      # 群聊列表
+    - 1145141919810
+
+# AI 服务配置, 仅支持 OpenAI API
+ai:
+  base_url: https://api.openai.com/v1  # AI API 基础 URL
+  api_key: sk-ciallo1234567890  # API 密钥
+  model: chatgpt-3.5-turbo # 使用的 AI 模型
+  temperature: 0.7  # 温度参数，控制回复的随机性
