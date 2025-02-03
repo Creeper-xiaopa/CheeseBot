@@ -3,7 +3,6 @@ from fastapi import FastAPI, Request
 from typing import List
 from queue import Queue
 from threading import Lock
-from get_config import bot_config
 
 # 消息队列, 用于存储接收到的消息
 rx_msg = Queue()
@@ -32,6 +31,6 @@ def get_new() -> List[dict]:
             msgs.append(rx_msg.get())
         return msgs
 
-def server():
+def server(host, port):
     # 启动 WebHook 服务器
-    uvicorn.run(app, host=bot_config.webhook_host, port=bot_config.webhook_port)
+    uvicorn.run(app, host=host, port=port, log_level="warning")

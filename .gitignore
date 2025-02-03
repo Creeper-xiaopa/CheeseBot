@@ -170,5 +170,6 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# config.yml
+# CheeseBot
 config.yml
+log/
