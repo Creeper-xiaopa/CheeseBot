@@ -17,8 +17,7 @@ def main_loop():
     if get_msg.has_new():
         msgs = get_msg.get_new()
         for msg in msgs:
-            if proc_msg.check(msg):
-                pass
+            proc_msg.proc(msg)
 
 if __name__ == '__main__':
     log_msg('INFO', '开始记录日志')
