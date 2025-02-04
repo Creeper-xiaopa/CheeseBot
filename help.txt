@@ -1,0 +1,6 @@
+[CheeseBot 命令列表]
+help - 显示此帮助信息
+echo - 重复您输入的内容
+
+更多功能正在开发中...
+Copyright (c) 2024- Creeper_xiaopa. All rights reserved.

@@ -13,7 +13,7 @@ def start_webhook_daemon():
     server_thread.daemon = True # 设为时候进程
     server_thread.start()
 
-def main_loop():
+def main_loop():    
     if get_msg.has_new():
         msgs = get_msg.get_new()
         for msg in msgs:

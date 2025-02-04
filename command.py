@@ -1,4 +1,37 @@
+from get_config import bot_config
+from log import log_msg
+import send_request
+import yaml
+
+def cmd_help(data, msg):
+    send_request.send_group_msg(group_id=msg["group_id"], msg=f"[CQ:reply,id={msg["message_id"]}]{open('help.txt', 'r', encoding='utf-8').read()}")
+
+def cmd_echo(data, msg):
+    send_request.send_group_msg(group_id=msg["group_id"], msg=str(data))
 
 
-def do():
-    pass
+def do(command, data, msg):
+    # 从 YAML 文件中读取配置
+    try:
+        command_alias = yaml.safe_load(open("command_alias.yml", 'r', encoding='utf-8'))
+    except FileNotFoundError:
+        log_msg("ERROR", "找不到命令别名文件 command_alias.yml")
+        raise
+    except yaml.YAMLError as e:
+        log_msg("ERROR", f"解析 command_alias.yml 文件时出错:\n{e}")
+        raise
+    # 遍历所有大项
+    for main_cmd, aliases in command_alias.items():
+        # 如果命令在某个大项的别名列表中
+        if command in aliases:
+            # 构造对应的函数名
+            func_name = f"cmd_{main_cmd}"
+            # 获取函数对象
+            func = globals().get(func_name)
+            # 如果函数存在，则执行
+            if func:
+                func(data=data, msg=msg)
+                return
+    # 如果没有找到对应的命令，则返回错误信息
+    log_msg("INFO", f"未知命令: {command}")
+    send_request.send_group_msg(group_id=msg["group_id"], msg=f"[CQ:reply,id={msg["message_id"]}]未知命令: {command}, 使用 help 获取帮助")

@@ -4,6 +4,7 @@ from get_config import bot_config
 from log import log_msg
 from command import do as do_cmd
 import re
+import threading
 
 def check(msg: dict) -> bool:
     if msg.get("message_type") is None:
@@ -50,7 +51,7 @@ def split_command(command, self_id):
     else:
         # 字符串为空或全是空格，返回command为None，data为None
         return None, None
-
+    
 def proc(msg):
     if check(msg):
         global self_id
@@ -60,5 +61,7 @@ def proc(msg):
             command, data = split_command(command=cleaned_raw, self_id=bot_self_id)
             if command and command.startswith("#"): command = command[1:]
             log_msg("INFO", f"指令: {command}, 参数: {data}")
-            do_cmd(command, data, msg)
             
+            # 创建一个新线程来执行 do_cmd
+            thread = threading.Thread(target=do_cmd, args=(command, data, msg))
+            thread.start()
