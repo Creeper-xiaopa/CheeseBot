@@ -4,7 +4,6 @@
 
 import uvicorn
 import env
-import log
 from typing import List
 from fastapi import FastAPI, Request
 import asyncio
@@ -35,8 +34,8 @@ def get_new() -> List[dict]:
     return msgs
 
 
-host = env.get("WebHook.host", "0.0.0.0")
-port = env.get("WebHook.port", 8080)
+host = str(env.get("WebHook.host", "0.0.0.0"))
+port = int(env.get("WebHook.port", 8080))
 
 
 def server():

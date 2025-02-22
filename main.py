@@ -33,8 +33,11 @@ def server_thread():
 
 
 def main_loop():
-    # 这里可以添加主循环的逻辑
-    pass
+    if msg.check():
+        msgs = msg.get_new()
+        log.debug(f"收到 {len(msgs)} 条新消息")
+        for message in msgs:
+            log.trace(f"消息内容: {message}")
 
 
 def main():
